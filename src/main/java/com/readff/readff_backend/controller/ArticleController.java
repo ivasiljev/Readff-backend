@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin("*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/articles")
+@CrossOrigin("*")
 public class ArticleController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class ArticleController {
         return articleRepository.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/new")
     public Article postArticles(@RequestBody Article article) {
         return articleRepository.save(article);
     }

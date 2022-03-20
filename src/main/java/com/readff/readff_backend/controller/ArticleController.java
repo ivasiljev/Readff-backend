@@ -20,6 +20,7 @@ public class ArticleController {
     private ArticleRepository articleRepository;
 
     @GetMapping
+    @CrossOrigin("*")
     public Iterable<Article> getArticles() {
         return articleRepository.findAll();
     }

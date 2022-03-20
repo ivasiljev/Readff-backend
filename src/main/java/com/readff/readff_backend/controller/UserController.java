@@ -1,16 +1,21 @@
 package com.readff.readff_backend.controller;
 
-import java.util.Map;
+import com.readff.readff_backend.entity.User;
+import com.readff.readff_backend.service.UserService;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
+@CrossOrigin("*")
 public class UserController {
-    @GetMapping
-    public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
-        return principal.getAttributes();
+    @Autowired
+    private UserService userService;
+
+    // TODO: change askerUsername to askerAccessToken
+    @PostMapping
+    public User getUser(@RequestBody String username, @RequestBody(required = false) String askerUsername) {
+        return userService.getUserByUsername(username, askerUsername);
     }
 }
